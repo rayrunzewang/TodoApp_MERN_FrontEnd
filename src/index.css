@@ -1,0 +1,204 @@
+:root {
+  --primary: #3b3e3b;
+  --secondary: #181816;
+  --light: #eee;
+  --text: #01060d;
+  --inner-background: #eef1f3;
+  --background: #e4e4e1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.App {
+  padding: 20px;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h4 {
+  font-size: 18px;
+  color: var(--text);
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.todo {
+  position: relative;
+  background-color: var(--inner-background);
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  transition: 0.5s;
+  cursor: pointer;
+  margin: 0 auto 10px;
+  border: 1px dotted var(--text);
+}
+
+.todo:hover {
+  opacity: 0.5;
+}
+
+.todo .checkbox {
+  width: 20px;
+  height: 20px;
+  margin-right: 16px;
+  border-radius: 50px;
+  background-color: var(--inner-background);
+  border: 1px solid var(--text);
+  transition: 0.5s;
+}
+
+.todo.is-complete .checkbox {
+  background-color: var(--primary);
+  background-image: linear-gradient(to bottom, var(--primary), var(--secondary));
+}
+
+.todo .text {
+  font-size: 18px;
+}
+
+.todo.is-complete .text {
+  text-decoration: line-through;
+}
+
+.todo.is-complete::after {
+  content: "completed";
+  color: var(--secondary);
+  margin-left: 5px;
+}
+
+.todo .delete-todo {
+  position: absolute;
+  top: 50%;
+  font-size: 25px;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: var(--text);
+  background-color: var(--inner-background);
+  border: 1px solid var(--text);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addPopup {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 20px;
+  border-radius: 5px;
+  font-size: 20px;
+  color: var(--light);
+  background-image: linear-gradient(to bottom right, var(--primary), var(--secondary));
+  cursor: pointer;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--light);
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px var(--text);
+  border: 1px solid var(--text);
+}
+
+.closePopup {
+  position: absolute;
+  top: 5px;
+  right:5px;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  color: var(--inner-background);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary);
+  color: var(--light);
+  border-radius: 5px;
+}
+
+.popup h3 {
+  color: var(--text);
+  margin-bottom: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.add-todo-input {
+  appearance: none;
+  border: 1px solid var(--text);
+  outline: none;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 20px;
+}
+
+.button {
+  padding: 5px 30px;
+  border-radius: 10px;
+  border: 1px solid var(--text);
+  background:var(--background);
+  display: inline-block;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 18px;
+  margin-top: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.logout {
+  padding: 5px;
+  border-radius:5px;
+  border: 1px solid var(--text);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.login {
+  margin: 200px auto 0;
+  text-align: center;
+  border: 1px solid var(--text);
+  border-radius: 10px;
+  width: fit-content;
+  padding: 20px;
+  background-color: var(--background);
+  box-shadow: 5px 5px 10px var(--text);
+}
