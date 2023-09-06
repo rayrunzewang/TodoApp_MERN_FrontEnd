@@ -1,53 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { Link, Routes, Route, Navigate } from 'react-router-dom';
-import LoginForm from './components/Auth/LoginForm';
-import { useUser } from './UserContext'; 
-import axios from 'axios'; 
+import React, { useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Login from "./components/Login";
+import TodoApp from "./components/TodoApp";
+import { useUser } from "./UserContext"; // Import UserProvider from your context
+import { useNavigate } from "react-router-dom"; // 导入 useNavigate
+
 
 function App() {
-  const { user, setUser } = useUser(); 
-  const [loading, setLoading] = useState(true);
+  const { user } = useUser();
+  const navigate = useNavigate(); // 使用 useNavigate 钩子
 
   useEffect(() => {
-    axios.get('http://localhost:3001/check-session')
-      .then((response) => {
-        if (response.data.user) {
-          setUser(response.data.user);
-        }
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Session validation failed:', error);
-        setLoading(false);
-      });
-  }, [setUser]);
-  
-  const handleLogin = (loggedInUser) => {
-    setUser(loggedInUser);
-    console.log(loggedInUser);
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-  };
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
+    const loginStatus = localStorage.getItem("loginStatus");
+    if (loginStatus === "loggedIn") {
+        navigate("/todoapp");
+    } else {
+        navigate("/login");
+    }
+}, [navigate]);
   return (
-    <div className='login'>
-        <>
-          <h1>WELCOME TO TO-DO LIST</h1>
-          <LoginForm onLogin={handleLogin} />
-          <p>
-            Do not have an account？<Link to="/register">Register</Link>
-          </p>
-        </>
-    </div>
+    <>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/todoapp" element={<TodoApp /> } />          
+        <Route path="/" element={user ? <Navigate to="/todoapp" /> : <Navigate to="/login" />} />
+      </Routes>
+
+    </>
   );
 }
 
 export default App;
-
-
